@@ -1,6 +1,7 @@
 package com.beproffer.chatfirebase.fragments;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -63,26 +64,27 @@ public class RegistrationFragment extends Fragment {
 
         btnSign = (Button) v.findViewById(R.id.btn_sign_in);
         btnRegister = (Button) v.findViewById(R.id.btn_register);
-
-
+        
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
 
-        /*if (currentUser != null) {
-            Intent intent = new Intent(getContext(), MainActivity.class);
-            startActivity(intent);
-            ((MainActivity) getActivity()).ChangeFragment(MainActivity.MyFragmets.ListUsersFragment);
-        }*/
+        if (currentUser != null) {
 
+            ((MainActivity) getActivity()).ChangeFragment(MainActivity.MyFragmets.ListUsersFragment);
+        }
 
         btnSign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (!edEmail.getText().toString().equals("") ||
+                if (!edEmail.getText().toString().equals("") &
                         !edPassword.getText().toString().equals("")) {
-                    signing(edEmail.getText().toString(), edPassword.getText().toString());
+
+                    final String email = edEmail.getText().toString().trim();
+                    String password = edPassword.getText().toString().trim();
+
+                    signing(email, password);
                 } else {
                     Toast.makeText(getContext(), R.string.empty_email_or_password, Toast.LENGTH_SHORT).show();
                 }
@@ -97,6 +99,8 @@ public class RegistrationFragment extends Fragment {
                 if (!edEmailReg.getText().toString().equals("") ||
                         !edPasswordReg.getText().toString().equals("") ||
                         !edNameReg.getText().toString().equals(""))
+
+
                 {
                     registration();
                 } else {
@@ -117,7 +121,7 @@ public class RegistrationFragment extends Fragment {
 
 
     private void signing(String email, String password) {
-        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener((Executor) this, new OnCompleteListener<AuthResult>() {
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener((Activity) getActivity(), new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
@@ -204,9 +208,6 @@ public class RegistrationFragment extends Fragment {
                             }
                         }
                     });
-
-
-
 
 
     }
