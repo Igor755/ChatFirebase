@@ -1,6 +1,5 @@
 package com.beproffer.chatfirebase.adapter;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,13 +19,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     private List<UserData> listItems;
     public Context mContext;
     private OnItemClickListener itemClickListener;
-    private AlertDialog builder;
 
 
-    /*public PlacesUserAdapter(List<Places> listItems, Context mContext) {
-        this.listItems = listItems;
-        this.mContext = mContext;
-    }*/
+
 
     public UserAdapter(List<UserData> listItems,Context mContext, OnItemClickListener itemClickListener) {
         this.itemClickListener =itemClickListener;
