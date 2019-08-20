@@ -64,7 +64,7 @@ public class RegistrationFragment extends Fragment {
 
         btnSign = (Button) v.findViewById(R.id.btn_sign_in);
         btnRegister = (Button) v.findViewById(R.id.btn_register);
-        
+
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
